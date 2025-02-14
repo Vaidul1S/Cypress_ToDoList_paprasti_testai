@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 // Susikurti naują GitHub projektą
 // Jame susidiegti Cypress
 // Parašyti testus paskaitoje naudojamai svetainei https://todolist.james.am/#/ :
@@ -20,7 +22,5 @@ describe('ToDo Simple Test', () => {
         cy.get('ul.todo-list li').should('have.length', 3);
 
     });
-
-   
 
 });
