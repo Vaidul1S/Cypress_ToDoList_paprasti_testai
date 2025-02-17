@@ -35,6 +35,7 @@ describe('ToDo Simple Test', () => {
         // cy.getCookie('test3').should('exist');
 
         cy.getAllCookies().should('exist');
+        cy.clearAllCookies();
     })
 
 });
