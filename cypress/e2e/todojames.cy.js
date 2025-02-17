@@ -23,4 +23,18 @@ describe('ToDo Simple Test', () => {
 
     });
 
+    it('Cookies', () => {
+        cy.visit('https://todolist.james.am/#/');
+        cy.setCookie('test1', '1');
+        cy.setCookie('test2', 'test2');
+        cy.setCookie('test3', '{user: test3}');
+        cy.reload();
+
+        // cy.getCookie('test1').should('exist');
+        // cy.getCookie('test2').should('exist');
+        // cy.getCookie('test3').should('exist');
+
+        cy.getAllCookies().should('exist');
+    })
+
 });
