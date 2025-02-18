@@ -36,6 +36,21 @@ describe('ToDo Simple Test', () => {
 
         cy.getAllCookies().should('exist');
         cy.clearAllCookies();
+    });
+
+    it('Sessions', () => {
+        cy.session('sesija', () => {
+            cy.visit('https://todolist.james.am/#/');
+            cy.get('input.new-todo').type('sesija wow{enter}');            
+        })
+    });
+
+    it('fancy command', () => {
+        cy.addToDos('test', 'sName');
+        // cy.addToDos2('test2'); be sesijos, butina visit vel rasyt, nes po sesijos imituojamas svetaines uzdarymas arba galima i beforeEach isirasyti visist
+        cy.visit('https://todolist.james.am/#/');
+        cy.get('ul.todo-list li').should('have.length.greaterThan', 0);
+
     })
 
 });
