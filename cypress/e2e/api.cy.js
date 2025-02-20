@@ -47,16 +47,33 @@ describe('API testing methods', () => {
         cy.fixture('test').then((manoData) => {
             const requestBody = manoData;
             cy.request('POST', 'https://jsonplaceholder.typicode.com/posts', requestBody)
-            .then((response) => {
-                expect(response.status).to.eq(201)
-                expect(response.body.body.title).to.eq('test post fixtures')
-                expect(response.body.body.body).to.eq('this is test post fixtures')
-                expect(response.body.body.user_id).to.eq(2)
-                
-            });
+                .then((response) => {
+                    expect(response.status).to.eq(201)
+                    expect(response.body.body.title).to.eq('test post fixtures')
+                    expect(response.body.body.body).to.eq('this is test post fixtures')
+                    expect(response.body.body.user_id).to.eq(2)
+
+                });
         });
     });
 
-    
+    it('GET query parameters', () => {
+        const params = { name: "id labore ex et quam laborum", };
+
+        cy.request({
+            method: 'GET', 
+            url: 'https://jsonplaceholder.typicode.com/comments', 
+            qs: params
+        })
+            .then((response) => {
+                expect(response.status).to.eq(200)
+                console.log(response.body);
+                expect(response.body[0].name).to.eq('id labore ex et quam laborum')
+                expect(response.body[0].body).contain('laudantium enim quasi')
+                expect(response.body[0]).has.property('email')
+                expect(response.body).has.length(1)
+            });
+    });
+
 });
 
