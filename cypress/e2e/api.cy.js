@@ -61,8 +61,8 @@ describe('API testing methods', () => {
         const params = { name: "id labore ex et quam laborum", };
 
         cy.request({
-            method: 'GET', 
-            url: 'https://jsonplaceholder.typicode.com/comments', 
+            method: 'GET',
+            url: 'https://jsonplaceholder.typicode.com/comments',
             qs: params
         })
             .then((response) => {
@@ -72,6 +72,51 @@ describe('API testing methods', () => {
                 expect(response.body[0].body).contain('laudantium enim quasi')
                 expect(response.body[0]).has.property('email')
                 expect(response.body).has.length(1)
+            });
+    });
+
+    it('POST login and creating access token', () => {
+        let accessToken = null;
+
+        cy.request({
+            method: 'POST',
+            url: 'https://dummyjson.com/auth/login',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: {
+                username: 'emilys',
+                password: 'emilyspass',
+                expiresInMinins: 50
+            }
+        })
+            .then((response) => {
+                expect(response.status).to.eq(200)
+                accessToken = response.body.accessToken
+                console.log(accessToken);
+
+            });
+    });
+
+    it('Fetching cookies', () => {
+        cy.request({
+            method: 'POST',
+            url: 'https://dummyjson.com/auth/login',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: {
+                username: 'sophiab',
+                password: 'sophiabpass',
+                expiresInMinins: 50
+            },
+        })
+            .then((response) => {
+                expect(response.status).to.eq(200)
+                cy.getCookies().then((cookies) => {
+                    cy.log('Cookies:', cookies);
+                });
+
             });
     });
 
