@@ -3,7 +3,7 @@
 describe('API testing methods', () => {
     it('GET', () => {
         cy.request('GET', 'https://jsonplaceholder.typicode.com/posts/1')
-            .its('status').should('eq', 200);        
+            .its('status').should('eq', 200);
     });
 
     it('POST', () => {
@@ -93,7 +93,6 @@ describe('API testing methods', () => {
                 expect(response.status).to.eq(200)
                 accessToken = response.body.accessToken
                 console.log(accessToken);
-
             });
     });
 
@@ -118,6 +117,4 @@ describe('API testing methods', () => {
 
             });
     });
-
 });
-
